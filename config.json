@@ -1,0 +1,20 @@
+{
+    "dictionaryDirectory": "./src/data/lang",
+    "typingsDirectory": "./src/util/",
+    "typingsFile": "lemma.ts",
+    "hookDirectory": "./src/util/",
+    "hookFile": "dictionary.tsx",
+    "defaultLanguage": "ENGLISH",
+    "languages": [
+        {
+            "label": "ENGLISH",
+            "code": "en",
+            "locale": "en-US"
+        },
+        {
+            "label": "GREEK",
+            "code": "el",
+            "locale": "el-GR"
+        }
+    ]
+}
