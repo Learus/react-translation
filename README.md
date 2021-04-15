@@ -21,6 +21,25 @@ python3 rt_install.py -r
 This deletes all generated files (lang jsons, js/ts utils and scripts).
 Then, you can delete the git repository folder.
 
+### Note
+
+All paths in the rt_config.json are used **in relation to** to it specifically. For example, if the `dictionaryDirectory` field is set to `../src/data/lang/`, it means that the initial `src` folder is **above** the config file. Specifically:
+
+```sh
+src/
+    ...
+    data/
+        lang/
+            ENGLISH.json
+            FRENCH.json
+react-translation/
+    rt_install.py
+    rt_config.json
+    templates/
+        ...
+    ...
+```
+
 ## Usage
 
 ### 1. An Example
@@ -159,3 +178,6 @@ Each language's data-dictionary is saved in a JSON file in the folder spcified b
     ...
 }
 ```
+
+## Configuration
+
