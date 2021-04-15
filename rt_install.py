@@ -24,17 +24,17 @@ pathlib.Path(config['typingsDirectory']).mkdir(parents=True, exist_ok=True)
 
 typingsFile = config['typingsDirectory'] + config['typingsFile']
 hookFile = config['hookDirectory'] + config['hookFile']
-insertionFile = f"{config['insertionDirectory']}/lemma.py"
-installationFile = f"{config['configDirectory']}/rt_install.py"
-configFile = f"{config['configDirectory']}/rt_config.json"
+# insertionFile = f"{config['insertionDirectory']}/lemma.py"
+# installationFile = f"{config['configDirectory']}/rt_install.py"
+# configFile = f"{config['configDirectory']}/rt_config.json"
 
 try:
     if remove:
         pathlib.Path(typingsFile).unlink()
         pathlib.Path(hookFile).unlink()
-        pathlib.Path(insertionFile).unlink()
-        pathlib.Path(installationFile).unlink()
-        pathlib.Path(configFile).unlink()
+        # pathlib.Path(insertionFile).unlink()
+        # pathlib.Path(installationFile).unlink()
+        # pathlib.Path(configFile).unlink()
         for lang in config['languages']:
             langfile = f"{config['dictionaryDirectory']}/{lang['label']}.json"
             pathlib.Path(langfile).unlink()
@@ -110,6 +110,6 @@ with open(typingsFile, 'w+') as typingsfd:
 
 # Copy config & lemma.py to root
 
-shutil.copy('./lemma.py', insertionFile)
-shutil.copy('./rt_install.py', installationFile)
-shutil.copy('./rt_config.json', configFile)
+# shutil.copy('./lemma.py', insertionFile)
+# shutil.copy('./rt_install.py', installationFile)
+# shutil.copy('./rt_config.json', configFile)

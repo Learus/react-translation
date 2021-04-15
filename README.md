@@ -12,14 +12,14 @@ cd react-translation
 python3 rt_install.py
 ```
 
-You are free to delete the git repository folder after installation.
 If you want to uninstall the package just run:
 
 ```sh
 python3 rt_install.py -r
 ```
 
-**FROM INSIDE THE GIT REPOSITORY FOLDER**. If you have removed it, reclone it.
+This deletes all generated files (lang jsons, js/ts utils and scripts).
+Then, you can delete the git repository folder.
 
 ## Usage
 
