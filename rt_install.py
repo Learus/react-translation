@@ -32,6 +32,13 @@ hookFile = config['hookDirectory'] + config['hookFile']
 # configFile = f"{config['configDirectory']}/rt_config.json"
 
 try:
+    def recurse_remove_dirs(path):
+        try:
+            pathlib.Path(path).rmdir()
+        except OSError:
+            return
+        recurse_remove_dirs(pathlib.Path(path).parent)
+
     if remove:
         pathlib.Path(typingsFile).unlink()
         pathlib.Path(hookFile).unlink()
@@ -41,9 +48,9 @@ try:
         for lang in config['languages']:
             langfile = f"{config['dictionaryDirectory']}/{lang['label']}.json"
             pathlib.Path(langfile).unlink()
-        pathlib.Path(config['dictionaryDirectory']).rmdir()
-        pathlib.Path(config['hookDirectory']).rmdir()
-        pathlib.Path(config['typingsDirectory']).rmdir()
+        recurse_remove_dirs(config['dictionaryDirectory'])
+        recurse_remove_dirs(config['hookDirectory'])
+        recurse_remove_dirs(config['typingsDirectory'])
         
         exit()
 except:
