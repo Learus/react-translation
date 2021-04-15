@@ -1,9 +1,16 @@
 import json
 import os
 import pathlib
+import sys
+import shutil
 
+remove = False
+try:
+    remove = sys.argv[1] == '-r' or sys.argv[1] == '--remove'
+except:
+    pass
 
-configFile = './config.json'
+configFile = './rt_config.json'
 config = None
 
 with open(configFile, 'r') as config:
@@ -13,12 +20,37 @@ pathlib.Path(config['hookDirectory']).mkdir(parents=True, exist_ok=True)
 pathlib.Path(config['dictionaryDirectory']).mkdir(parents=True, exist_ok=True)
 pathlib.Path(config['typingsDirectory']).mkdir(parents=True, exist_ok=True)
 
-for lang in config['languages']:
-    with open(f"{config['dictionaryDirectory']}/{lang['label']}.json", 'w+') as file:
-        file.write('{}')
+
 
 typingsFile = config['typingsDirectory'] + config['typingsFile']
 hookFile = config['hookDirectory'] + config['hookFile']
+insertionFile = f"{config['insertionDirectory']}/lemma.py"
+installationFile = f"{config['configDirectory']}/rt_install.py"
+configFile = f"{config['configDirectory']}/rt_config.json"
+
+try:
+    if remove:
+        pathlib.Path(typingsFile).unlink()
+        pathlib.Path(hookFile).unlink()
+        pathlib.Path(insertionFile).unlink()
+        pathlib.Path(installationFile).unlink()
+        pathlib.Path(configFile).unlink()
+        for lang in config['languages']:
+            langfile = f"{config['dictionaryDirectory']}/{lang['label']}.json"
+            pathlib.Path(langfile).unlink()
+        pathlib.Path(config['dictionaryDirectory']).rmdir()
+        pathlib.Path(config['hookDirectory']).rmdir()
+        pathlib.Path(config['typingsDirectory']).rmdir()
+        
+        exit()
+except:
+    print('error')
+    exit()
+
+
+for lang in config['languages']:
+    with open(f"{config['dictionaryDirectory']}/{lang['label']}.json", 'w+') as file:
+        file.write('{}')
 
 # dictionary.tsx
 templateHookFile = './templates/dictionary.tsx'
@@ -50,6 +82,7 @@ lines.append('')
 lines.append('export const locale = (lang: Language): string => {')
 for lang in config['languages']:
     lines.append(f"    if (lang === {lang['label']}) return '{lang['locale']}';")
+lines.append(f"    return ''")
 lines.append('}')
 lines.append('')
 
@@ -74,3 +107,9 @@ with open(hookFile, 'a+') as contents:
 # lemma.ts
 with open(typingsFile, 'w+') as typingsfd:
     typingsfd.write('export type Lemma = "";')
+
+# Copy config & lemma.py to root
+
+shutil.copy('./lemma.py', insertionFile)
+shutil.copy('./rt_install.py', installationFile)
+shutil.copy('./rt_config.json', configFile)

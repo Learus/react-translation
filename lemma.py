@@ -2,7 +2,7 @@
 import json
 import sys
 
-configFile = './config.json'
+configFile = './rt_config.json'
 config = None
 
 with open(configFile, 'r') as config:

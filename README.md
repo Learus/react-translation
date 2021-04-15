@@ -8,9 +8,18 @@ A simple translation system for the react ecosystem.
 git clone https://github.com/learus/react-translation.git
 cd react-translation
 
-# Edit config.json if you need to
-python3 install.py
+# Edit rt_config.json if you need to
+python3 rt_install.py
 ```
+
+You are free to delete the git repository folder after installation.
+If you want to uninstall the package just run:
+
+```sh
+python3 rt_install.py -r
+```
+
+**FROM INSIDE THE GIT REPOSITORY FOLDER**. If you have removed it, reclone it.
 
 ## Usage
 
@@ -49,7 +58,7 @@ const MultilingualComponent = () => {
 }
 ```
 
-The `languages` field in the `config.json` for this example looks like this:
+The `languages` field in the `rt_config.json` for this example looks like this:
 
 ```json
 "languages": [
@@ -67,11 +76,24 @@ The `languages` field in the `config.json` for this example looks like this:
 
 ```
 
-### 2. The lemma insertion script `lemma.py`
+### 2. The `<DictionaryProvider>` component
 
-Using this script, you can create new Lemmas for the languages you have chosen (specified in the `config.json`). Run `python3 lemma.py` provide your Lemma and a translation for each of your chosen languages as prompted.
+As shown in the basic example, you should wrap the component you want to have translation in, with a `<DictionaryProvider>` and supply it with a language prop (of type [Language](#6-the-language-type)). If the `<DictionaryProvider>` does not exist any react hooks or components this package provides will not work.
 
-### 3. The `Lemma` type
+### 3. The `useDictionary` hook
+
+Using React context, and custom use of hooks, this hook returns a function that takes a lemma and returns a string in the currently active language. Again, that language is chosen in the [`<DictionaryProvider>`](#2-the-dictionaryprovider-component) component.  
+The returned function's type signature is:
+
+```ts
+return (key: Lemma) => string
+```
+
+### 4. The lemma insertion script `lemma.py`
+
+Using this script, you can create new Lemmas for the languages you have chosen (specified in the `rt_config.json`). Run `python3 lemma.py` provide your Lemma and a translation for each of your chosen languages as prompted.
+
+### 5. The `Lemma` type
 
 Any string-key the dictionary has is a lemma. The `Lemma` type is simply all those strings separated with OR (|), a.k.a.
 
@@ -81,13 +103,17 @@ export type Lemma = "lemma1" | "lemma2" | "lemma3"
 
 This forces the user to provide the dictionary function with only valid lemmas, hence decreasing the amount of mistakes. It is created on installation and modified automatically on any lemma isnertion using the insertion script `lemma.py`.
 
-### 4. The `Language` type
+### 6. The `Language` type
 
 The `Language` type again is an OR separated string type that keeps all available languages, as specified in the config file. It is created on installation.
 
-### 5. The `<Dictionary>` component
+### 7. The `useLanguage` hook
 
-Similarly to the `useDictionary` hook, this uses context to figure out the currently selected language, and returns the translated text given a lemma.
+As the name suggests, using the same context as the [`useDictionary`](#3-the-usedictionary-hook), this hook returns the currently active language.
+
+### 7. The `<Dictionary>` component
+
+Similarly to the [`useDictionary`](#2-the-usedictionary-hook) hook, this uses context to figure out the currently selected language, and returns the translated text given a lemma.
 
 ```tsx
 import { DictionaryProvider, Language, ENGLISH, FRENCH } from '../util/dictionary'
@@ -118,7 +144,7 @@ const MultilingualComponent = () => {
 
 ## Translation data structure
 
-Each language's data-dictionary is saved in a JSON file in the folder spcified by the `dictionaryDirectory` in the `config.json` file. They are created on installation, and are updated automatically when using the lemma insertion script. The files' format is simple. Here's an example:
+Each language's data-dictionary is saved in a JSON file in the folder spcified by the `dictionaryDirectory` in the `rt_config.json` file. They are created on installation, and are updated automatically when using the lemma insertion script. The files' format is simple. Here's an example:
 
 ```json
 // ENGLISH.json
