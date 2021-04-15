@@ -4,6 +4,9 @@ import pathlib
 import sys
 import shutil
 
+cwd = os.path.dirname(os.path.realpath(__file__))
+os.chdir(cwd)
+
 remove = False
 try:
     remove = sys.argv[1] == '-r' or sys.argv[1] == '--remove'
@@ -44,7 +47,6 @@ try:
         
         exit()
 except:
-    print('error')
     exit()
 
 

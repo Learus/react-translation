@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
+import os
+
+cwd = os.path.dirname(os.path.realpath(__file__))
+os.chdir(cwd)
 
 configFile = './rt_config.json'
 config = None
