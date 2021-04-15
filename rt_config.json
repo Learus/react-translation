@@ -1,12 +1,12 @@
 {
-    "dictionaryDirectory": "./test/src/data/lang",
-    "typingsDirectory": "./test/src/util/",
+    "dictionaryDirectory": "../src/data/lang",
+    "typingsDirectory": "../src/util/",
     "typingsFile": "lemma.ts",
-    "hookDirectory": "./test/src/util/",
+    "hookDirectory": "../src/util/",
     "hookFile": "dictionary.tsx",
     "defaultLanguage": "ENGLISH",
-    "insertionDirectory": "./test",
-    "configDirectory": "./test",
+    "insertionDirectory": "../",
+    "configDirectory": "../",
     "languages": [
         {
             "label": "ENGLISH",
