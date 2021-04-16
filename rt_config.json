@@ -5,8 +5,6 @@
     "hookDirectory": "../src/util/",
     "hookFile": "dictionary.tsx",
     "defaultLanguage": "ENGLISH",
-    "insertionDirectory": "../",
-    "configDirectory": "../",
     "languages": [
         {
             "label": "ENGLISH",
@@ -18,6 +16,5 @@
             "code": "el",
             "locale": "el-GR"
         }
-    ],
-    "prefix": "rt_"
+    ]
 }

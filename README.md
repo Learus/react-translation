@@ -8,9 +8,10 @@ A simple translation system for the react ecosystem.
 git clone https://github.com/learus/react-translation.git
 cd react-translation
 
-# Edit rt_config.json if you need to
 python3 rt_install.py
 ```
+
+To configure the package to your needs check the [configuration section](#configuration).  
 
 If you want to uninstall the package just run:
 
@@ -20,25 +21,6 @@ python3 rt_install.py -r
 
 This deletes all generated files (lang jsons, js/ts utils and scripts).
 Then, you can delete the git repository folder.
-
-### Note
-
-All paths in the rt_config.json are used **in relation to** to it specifically. For example, if the `dictionaryDirectory` field is set to `../src/data/lang/`, it means that the initial `src` folder is **above** the config file. Specifically:
-
-```sh
-src/
-    ...
-    data/
-        lang/
-            ENGLISH.json
-            FRENCH.json
-react-translation/
-    rt_install.py
-    rt_config.json
-    templates/
-        ...
-    ...
-```
 
 ## Usage
 
@@ -181,3 +163,34 @@ Each language's data-dictionary is saved in a JSON file in the folder spcified b
 
 ## Configuration
 
+If you want to change the default file names, save directories, and also add more languages, or change the default one, the `rt_config.json` file is the one you should modify. Below is every changeable field explained:
+
+| Field Name            | Explanation                                                                 | Default                                                   |
+| --------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `dictionaryDirectory` | The directory in which the lang files/dictionary files will be saved        | `"../src/data/lang"`                                      |
+| `typingsFile`         | The file name from which the `Lemma` type is exported                       | `"lemma.ts"`                                              |
+| `typingsDirectory`    | The directory in which the `typingsFile` will be saved                      | `"../src/util"`                                           |
+| `hookFile`            | The file in which all hooks, components and utils are saved                 | `"directory.tsx"`                                         |
+| `hookDirectory`       | The directory in which the `hookFile` will be saved                         | `"../src/util"`                                           |
+| `languages`           | An array of objects of type `{label: string, code: string, locale: string}` | `[{"label": "ENGLISH", "code": "en", "locale": "en-US"}]` |
+| `defaultLanguage`     | The default language's label                                                | `"ENGLISH"`                                               |
+
+
+### Note
+
+All paths in the rt_config.json are used **in relation to** to it specifically. For example, if the `dictionaryDirectory` field is set to `../src/data/lang/`, it means that the initial `src` folder is **above** the config file. Specifically:
+
+```sh
+src/
+    ...
+    data/
+        lang/
+            ENGLISH.json
+            FRENCH.json
+react-translation/
+    rt_install.py
+    rt_config.json
+    templates/
+        ...
+    ...
+```
