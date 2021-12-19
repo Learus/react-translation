@@ -1,8 +1,9 @@
 {
-    "dictionaryDirectory": "../src/data/lang",
-    "typingsDirectory": "../src/util/",
+    "rootDir": "./translation/",
+    "dictionaryDirectory": "./data",
+    "typingsDirectory": "./",
     "typingsFile": "lemma.ts",
-    "hookDirectory": "../src/util/",
+    "hookDirectory": "./",
     "hookFile": "dictionary.tsx",
     "defaultLanguage": "ENGLISH",
     "languages": [
