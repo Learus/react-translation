@@ -1,14 +1,17 @@
 import * as fs from 'fs';
 import * as appRootPath from 'app-root-dir';
 import * as readline from 'readline';
+import * as path from 'path';
 
 export function formatConfig()
 {
-    const configFile = '../config.json';
+    const __dirname = path.resolve();
+
+    const configFile = __dirname + '/config.json';
     let config = JSON.parse(fs.readFileSync(configFile));
     let rootDir = appRootPath.get() + '/';
 
-    let userConfig = JSON.parse(fs.readFileSync('../userConfig.json'));
+    let userConfig = JSON.parse(fs.readFileSync(__dirname + '/userConfig.json'));
 
     if (userConfig && userConfig.rootDir) 
         rootDir = rootDir + userConfig.rootDir;

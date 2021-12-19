@@ -5,16 +5,18 @@ import { formatConfig } from './util.js';
 
 
 export default function install (options) {
+    const __dirname = path.resolve();
+
     // Write User Options
     if (options) 
     {
         if (options.rootDir) options.rootDir = options.rootDir + '/';
-        fs.writeFileSync("../userConfig.json", JSON.stringify(options));
+        fs.writeFileSync(__dirname + "/userConfig.json", JSON.stringify(options));
     }
 
     const config = formatConfig();
     
-    const templateHookFile = './templates/dictionary.tsx';
+    const templateHookFile = './src/templates/dictionary.tsx';
     const typingsFile = config.typingsDirectory + config.typingsFile;
     const hookFile = config.hookDirectory + config.hookFile;
 

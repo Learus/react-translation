@@ -1,6 +1,6 @@
 {
-  "name": "react-translation",
-  "version": "1.0.0",
+  "name": "@learus/react-translation",
+  "version": "1.0.1",
   "description": "A simple localization system for the react ecosystem.",
   "keywords": [
     "npm",
@@ -38,5 +38,6 @@
     "meow": "^10.1.2",
     "path": "^0.12.7",
     "readline": "^1.3.0"
-  }
+  },
+  "devDependencies": {}
 }

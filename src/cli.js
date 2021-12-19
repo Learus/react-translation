@@ -2,9 +2,11 @@
 // 'use strict';
 
 import meow from 'meow';
+import { exit } from 'process';
 import install from './install.js';
 import { lemma } from './lemma.js';
 import uninstall from './uninstall.js';
+import path from 'path';
 
 const cli = meow(``, {
     importMeta: import.meta,
